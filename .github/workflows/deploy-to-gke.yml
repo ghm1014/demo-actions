@@ -24,10 +24,12 @@ jobs:
 
     # Authenticate Docker with Google Container Registry (GCR)
     - name: Authenticate Docker with GCR
+      working-directory: weather-app
       run: gcloud auth configure-docker
 
     # Build and push Docker image
     - name: Build and push Docker image
+      working-directory: weather-app
       run: |
         IMAGE_NAME=gcr.io/${{ secrets.GCP_PROJECT_ID }}/weather-app
         docker build -t $IMAGE_NAME .
@@ -35,6 +37,7 @@ jobs:
 
     # Deploy to GKE
     - name: Deploy to GKE
+      working-directory: weather-app
       run: |
         gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }}
         kubectl apply -f kubernetes/deployment.yaml
