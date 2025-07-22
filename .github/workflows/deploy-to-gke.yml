@@ -34,7 +34,7 @@ jobs:
     - name: Build and push Docker image
       working-directory: weather-app
       run: |
-        IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/weather-app-repo/weather-app:latest
+        IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/weather-app/weather-app:latest
         docker build -t $IMAGE_NAME .
         docker push $IMAGE_NAME
 
